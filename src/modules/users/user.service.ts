@@ -12,6 +12,16 @@ export class UserService {
       .select('-password -__v -tempPassword');
   }
 
+  async updateSteamId(userId: string, steamId: string) {
+    return this.userModel
+      .findByIdAndUpdate(
+        new mongoose.Types.ObjectId(userId),
+        { steamId },
+        { new: true },
+      )
+      .select('-password -__v -tempPassword');
+  };
+
   async changeAvatar(userId: string, avatar: string) {
     return this.userModel
       .findByIdAndUpdate(

@@ -22,4 +22,12 @@ export class UserController {
 
     return this.userService.changeAvatar(user.userId as string, body.avatar);
   }
+
+  @Post('/update-steam-id')
+  @UseGuards(AuthGuard)
+  async updateSteamId(@Req() req, @Body() body) {
+    const user = req['user'];
+
+    return this.userService.updateSteamId(user.userId as string, body.steamId);
+  }
 }

@@ -23,6 +23,12 @@ class User {
 
   @Prop()
   language: string;
+
+  @Prop({ default: 'user' })
+  role: string;
+
+  @Prop()
+  steamId: string;
 }
 
 export { User };
