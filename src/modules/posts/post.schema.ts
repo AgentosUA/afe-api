@@ -10,7 +10,13 @@ class Post {
   title: string;
 
   @Prop({ required: true })
-  text: string;
+  description: string;
+
+  @Prop({ required: true })
+  content: string;
+
+  @Prop()
+  image: string;
 
   @Prop()
   date: string;

@@ -11,6 +11,7 @@ import { AppService } from './app.service';
 
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/users/user.module';
+import { PostModule } from './modules/posts/post.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserModule } from './modules/users/user.module';
     }),
     MongooseModule.forRoot(process.env.DB_URL),
     UserModule,
+    PostModule,
     AuthModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
