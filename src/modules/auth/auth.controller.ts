@@ -32,8 +32,9 @@ export class AuthController {
   @UseGuards(AuthGuard)
   async refreshToken(@Req() req) {
     const userId = req['user'].userId as string;
+    const role = req['user'].role as string;
 
-    return this.authService.refreshToken(userId);
+    return this.authService.refreshToken(userId, role);
   }
 
   @Post('/forgot-password')

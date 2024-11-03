@@ -57,11 +57,13 @@ export class AuthService {
 
     const token = this.jwtService.sign({
       userId: existedUser[0].id,
+      role: existedUser[0].role,
     });
 
     const refreshToken = this.jwtService.sign(
       {
         userId: existedUser[0].id,
+        role: existedUser[0].role,
       },
       {
         expiresIn: '7d',
@@ -126,15 +128,15 @@ export class AuthService {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'apmo.help@gmail.com', // todo: change to APMO email
+        user: 'info@after-the-end.pro',
         pass: process.env.GMAIL_APP_SECRET,
       },
     });
 
     const mailOptions = {
-      from: 'apmo.help@gmail.com',
+      from: 'info@after-the-end.pro',
       to: email,
-      subject: 'APMO Temporary Password',
+      subject: 'Metro After the end: Temporary Password',
       html: `<font style="font-size: 16px;">Your temporary password is</font> <br /><table><tr><td style="padding: 20px; background: #000; color: #fff"; font-size: 16px;">${tempPassword}<tr /></tr></table><br/><b style="font-size: 16px">Please change you password after logging in.</b>`,
       // todo: create a nice template for this email
     };
@@ -144,14 +146,16 @@ export class AuthService {
     return;
   }
 
-  async refreshToken(userId: string) {
+  async refreshToken(userId: string, role: string) {
     const token = this.jwtService.sign({
       userId,
+      role,
     });
 
     const refreshToken = this.jwtService.sign(
       {
         userId,
+        role,
       },
       {
         expiresIn: '7d',

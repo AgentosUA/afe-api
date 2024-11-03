@@ -1,15 +1,28 @@
-// import { Plan } from './plan.schema';
+import { Optional } from '@nestjs/common';
+import { isNotEmpty, isEmpty, IsNotEmpty, ValidateIf } from 'class-validator';
 
 export class SignUpDto {
-  readonly email: string;
-  readonly username?: string;
-  readonly password: string;
+  @IsNotEmpty()
+  email: string;
+
+  @IsNotEmpty()
+  username: string;
+
+  @IsNotEmpty()
+  password: string;
 }
 
 export class SignInDto {
-  readonly email?: string;
-  readonly username?: string;
-  readonly password: string;
+  @ValidateIf((o) => isEmpty(o.username))
+  @IsNotEmpty()
+  email?: string;
+
+  @ValidateIf((o) => isEmpty(o.email))
+  @IsNotEmpty()
+  username?: string;
+
+  @IsNotEmpty()
+  password: string;
 }
 
 export class ChangePasswordDto {

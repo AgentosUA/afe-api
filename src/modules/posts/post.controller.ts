@@ -13,6 +13,7 @@ import { PostService } from './post.service';
 import { AuthGuard } from '../auth/auth.guard';
 
 import { CreatePostDto, DeletePostDto } from './post.dto';
+import { Roles } from 'src/shared/decorators/roles.decorator';
 
 @Controller('/posts')
 export class PostController {
@@ -25,12 +26,14 @@ export class PostController {
 
   @Post('/')
   @UseGuards(AuthGuard)
+  @Roles('admin')
   async createPost(@Body() dto: CreatePostDto) {
     return this.postService.createPost(dto);
   }
 
   @Delete('/:id')
-  // @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
+  @Roles('admin')
   async deletePost(@Param() param: DeletePostDto) {
     return this.postService.deletePost(param.id);
   }
