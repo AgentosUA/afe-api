@@ -27,7 +27,7 @@ class User {
   @Prop({ default: 'user' })
   role: string;
 
-  @Prop()
+  @Prop({ default: null })
   steamId: string;
 }
 
